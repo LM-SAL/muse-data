@@ -1,13 +1,13 @@
-# muse-sample-data
+# muse-data
 
-Sample data files for the [`muse`](https://github.com/LM-SAL/muse) documentation gallery.
+Sample and test data files for the [`muse`](https://github.com/LM-SAL/muse) documentation gallery and remote-data tests.
 
 The files are **not** stored in the git tree — they are attached as release assets and downloaded on demand by `muse.data.fetch_example_data`, which caches them locally with [pooch](https://www.fatiando.org/pooch/).
 
 Download URL pattern:
 
 ```
-https://github.com/LM-SAL/muse-sample-data/releases/download/<tag>/<filename>
+https://github.com/LM-SAL/muse-data/releases/download/<tag>/<filename>
 ```
 
 ## Adding or updating files
