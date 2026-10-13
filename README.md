@@ -1,27 +1,20 @@
 # muse-data
 
-Sample and test data files for the [`muse`](https://github.com/LM-SAL/muse) documentation gallery and remote-data tests.
+Sample and test data for [muse](https://github.com/LM-SAL/muse), stored as
+release assets. Keep data files out of git.
 
-The files are **not** stored in the git tree — they are attached as release assets and downloaded on demand by `muse.data.fetch_example_data`, which caches them locally with [pooch](https://www.fatiando.org/pooch/).
+## Adding or updating data
 
-Download URL pattern:
-
-```
-https://github.com/LM-SAL/muse-data/releases/download/<tag>/<filename>
-```
-
-## Adding or updating files
-
-Use `upload_data.sh` (requires the [`gh` CLI](https://cli.github.com/), authenticated):
+With an authenticated [GitHub CLI](https://cli.github.com/), run:
 
 ```bash
-./upload_data.sh path/to/file1.nc path/to/file2.nc
+./upload_data.sh file1.nc file2.tar.gz
 ```
 
-Always upload to the `v1` tag (the default) and let it clobber same-named assets, one release holds the current copy of everything.
-The script prints the URL + SHA-256 entries to paste into `_REGISTRY` in `muse/data/__init__.py`; a changed file changes its hash, so update `_REGISTRY` in the same PR.
+Archive Zarr stores as a single `.tar.gz` file before uploading.
 
-Notes:
+The script creates the `v1` release if needed, replaces assets with matching
+names, and prints their download URLs and SHA-256 hashes.
 
-- Per-file limit is 2 GB (GitHub release asset limit).
-- Zarr stores must be uploaded as a single `.tar.gz` (assets are flat files).
+Update the URLs and SHA-256 hashes in `_REGISTRY` in `muse/data/__init__.py`
+when adding or changing a file.
