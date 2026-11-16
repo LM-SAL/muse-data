@@ -12,9 +12,9 @@ REPO=${REPO:-LM-SAL/muse-data}
 
 if [ "${1:-}" = "--release" ]; then
     tmp=$(mktemp -d)
+    trap 'rm -rf "$tmp"' EXIT
     gh release download dev --repo "$REPO" --dir "$tmp"
     gh release upload stable "$tmp"/* --repo "$REPO" --clobber
-    rm -rf "$tmp"
     exit 0
 fi
 
