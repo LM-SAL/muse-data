@@ -1,7 +1,12 @@
 # muse-data
 
-Sample and test data for [muse](https://github.com/LM-SAL/muse), stored as
-release assets. Keep data files out of git.
+Example data for [muse](https://github.com/LM-SAL/muse), stored as release assets.
+Keep data files out of git.
+
+- `dev`: the data of muse's main branch, which development versions download.
+- `stable`: the data of the latest muse release, which releases download.
+
+Older releases of muse may no longer find their data.
 
 ## Adding or updating data
 
@@ -11,10 +16,14 @@ With an authenticated [GitHub CLI](https://cli.github.com/), run:
 ./upload_data.sh file1.nc file2.tar.gz
 ```
 
-Archive Zarr stores as a single `.tar.gz` file before uploading.
+Archive Zarr stores and other folders as a single `.tar.gz` file before uploading.
+The script replaces the files of the same name in `dev` and prints their SHA-256
+hashes for `_REGISTRY` in `muse/data/__init__.py`.
 
-The script creates the `v1` release if needed, replaces assets with matching
-names, and prints their download URLs and SHA-256 hashes.
+## At a muse release
 
-Update the URLs and SHA-256 hashes in `_REGISTRY` in `muse/data/__init__.py`
-when adding or changing a file.
+```bash
+./upload_data.sh --release
+```
+
+copies every `dev` file to `stable`.
